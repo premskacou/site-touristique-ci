@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Star, CheckCircle2, Quote, ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function CustomerReviews({ onOpenBooking }) {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const { t } = useLanguage();
 
   const categories = [
-    { id: 'all', label: 'Tous les avis' },
-    { id: 'lagoon', label: 'Plages & Lagunes' },
-    { id: 'nature', label: 'Montagnes & Nature' },
-    { id: 'culture', label: 'Culture & Patrimoine' },
+    { id: 'all', label: t('reviews.cat_all') },
+    { id: 'lagoon', label: t('reviews.cat_lagoon') },
+    { id: 'nature', label: t('reviews.cat_nature') },
+    { id: 'culture', label: t('reviews.cat_culture') },
   ];
 
   const reviews = [
@@ -20,9 +22,9 @@ export default function CustomerReviews({ onOpenBooking }) {
       location: 'Paris, France',
       avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=160&q=80',
       rating: 5,
-      date: 'Il y a 2 semaines',
-      circuit: 'Escapade Assinie-Mafia & Lagune Aby',
-      text: "Un séjour tout simplement magique ! La balade en pirogue à Assinie au coucher du soleil et l'accueil chaleureux des Ivoiriens nous ont profondément touchés. L'équipe d'Akwaba Tours s'est occupée de tout avec un niveau de soin et de professionnalisme irréprochable.",
+      date: t('reviews.r1_date'),
+      circuit: t('reviews.r1_circuit'),
+      text: t('reviews.r1_text'),
     },
     {
       id: 2,
@@ -31,9 +33,9 @@ export default function CustomerReviews({ onOpenBooking }) {
       location: 'Montréal, Canada',
       avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=160&q=80',
       rating: 5,
-      date: 'Il y a 3 semaines',
-      circuit: 'Trek Mont Tonkpi & Cascades de Man',
-      text: "Revisiter la Terre d'Éburnie avec des guides locaux aussi passionnés a été une révélation. La traversée du pont de lianes sacré et le lever de soleil brumeux sur les collines de Man resteront gravés dans nos mémoires pour toujours. Organisation 10/10 !",
+      date: t('reviews.r2_date'),
+      circuit: t('reviews.r2_circuit'),
+      text: t('reviews.r2_text'),
     },
     {
       id: 3,
@@ -42,9 +44,9 @@ export default function CustomerReviews({ onOpenBooking }) {
       location: 'Genève, Suisse',
       avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=160&q=80',
       rating: 5,
-      date: 'Il y a 1 mois',
-      circuit: 'Basilique & Splendeurs de Yamoussoukro',
-      text: "La visite de la Basilique Notre-Dame de la Paix était grandiose, et que dire des soirées dégustation en maquis autour d'un authentique Garba et d'alloco frais ! Une immersion 100% authentique, sécurisée et chaleureuse. On reviendra sans hésiter.",
+      date: t('reviews.r3_date'),
+      circuit: t('reviews.r3_circuit'),
+      text: t('reviews.r3_text'),
     },
     {
       id: 4,
@@ -53,9 +55,9 @@ export default function CustomerReviews({ onOpenBooking }) {
       location: 'Bordeaux, France',
       avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=160&q=80',
       rating: 5,
-      date: 'Il y a 3 semaines',
-      circuit: 'Patrimoine & Quartier France à Grand-Bassam',
-      text: "Le charme intemporel de Grand-Bassam nous a conquis. Visiter les bâtisses coloniales du Quartier France avec un guide local passionné et déjeuner face aux rouleaux de l'Atlantique était une expérience culturelle sublime.",
+      date: t('reviews.r4_date'),
+      circuit: t('reviews.r4_circuit'),
+      text: t('reviews.r4_text'),
     },
   ];
 
@@ -78,7 +80,7 @@ export default function CustomerReviews({ onOpenBooking }) {
           className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-slate-200/90 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-xs font-medium text-slate-600 mb-6"
         >
           <span>—</span>
-          <span>Avis Voyageurs</span>
+          <span>{t('reviews.tag')}</span>
         </motion.div>
 
         {/* Section Header (Slide vers le bas) */}
@@ -91,8 +93,8 @@ export default function CustomerReviews({ onOpenBooking }) {
             className="max-w-2xl"
           >
             <h2 className="text-3xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-slate-900 leading-[1.2]">
-              Ce que nos voyageurs disent <br className="hidden sm:block" />
-              de leur aventure en Côte d'Ivoire
+              {t('reviews.title_1')} <br className="hidden sm:block" />
+              {t('reviews.title_2')}
             </h2>
           </motion.div>
 
@@ -112,7 +114,7 @@ export default function CustomerReviews({ onOpenBooking }) {
                 ))}
               </div>
               <span className="text-[12px] font-medium text-slate-500 mt-0.5">
-                +1 250 avis vérifiés de voyageurs
+                {t('reviews.verified_count')}
               </span>
             </div>
           </motion.div>
@@ -207,7 +209,7 @@ export default function CustomerReviews({ onOpenBooking }) {
                     {review.circuit}
                   </span>
                   <span className="text-xs font-medium text-[#1D71F2] group-hover:translate-x-1 transition-transform">
-                    Expérience vérifiée
+                    {t('reviews.verified')}
                   </span>
                 </div>
               </motion.div>
@@ -229,7 +231,7 @@ export default function CustomerReviews({ onOpenBooking }) {
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-3 pl-6 pr-2.5 py-2 rounded-full bg-[#1D71F2] hover:bg-[#1560D6] text-white font-medium text-sm shadow-[0_8px_20px_rgba(29,113,242,0.28)] transition-all duration-300 group cursor-pointer"
           >
-            <span>Réserver Votre Propre Aventure</span>
+            <span>{t('reviews.cta')}</span>
             <span className="w-8 h-8 rounded-full bg-white/20 group-hover:bg-white text-white group-hover:text-[#1D71F2] flex items-center justify-center transition-all duration-300">
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>

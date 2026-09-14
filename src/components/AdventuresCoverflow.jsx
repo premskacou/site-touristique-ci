@@ -1,48 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AdventuresCoverflow({ onOpenBooking }) {
+  const { t } = useLanguage();
+
   const adventures = [
     {
       id: 0,
-      title: 'Trek en Jungle Tropicale',
-      subtitle: 'Mont Tonkpi & Cascades de Man',
+      title: t('adventures.item_0_title'),
+      subtitle: t('adventures.item_0_sub'),
       image: '/images/man_mountains.jpg',
       tag: 'Man',
     },
     {
       id: 1,
-      title: 'Bivouac & Nuit Étoilée',
-      subtitle: 'Campement Nature Authentique',
+      title: t('adventures.item_1_title'),
+      subtitle: t('adventures.item_1_sub'),
       image: '/images/campers_sunset.jpg',
       tag: 'Bivouac',
     },
     {
       id: 2,
-      title: 'Balade en Pirogue sur la Lagune',
-      subtitle: 'Eaux Calmes d’Assinie',
+      title: t('adventures.item_2_title'),
+      subtitle: t('adventures.item_2_sub'),
       image: '/images/assinie_beach.jpg',
       tag: 'Assinie',
     },
     {
       id: 3,
-      title: 'Survol & Panorama Aérien',
-      subtitle: 'Vues Célestes d’Éburnie',
+      title: t('adventures.item_3_title'),
+      subtitle: t('adventures.item_3_sub'),
       image: '/images/hero_abidjan.jpg',
       tag: 'Abidjan',
     },
     {
       id: 4,
-      title: 'Safari Coucher de Soleil',
-      subtitle: 'Faune & Savane Dorée',
+      title: t('adventures.item_4_title'),
+      subtitle: t('adventures.item_4_sub'),
       image: '/images/hikers_trail.jpg',
       tag: 'Safari',
     },
     {
       id: 5,
-      title: 'Grand-Bassam Historique',
-      subtitle: 'Cité Balnéaire & Patrimoine UNESCO',
+      title: t('adventures.item_5_title'),
+      subtitle: t('adventures.item_5_sub'),
       image: '/images/smiling_hikers.jpg',
       tag: 'Bassam',
     },
@@ -84,7 +87,7 @@ export default function AdventuresCoverflow({ onOpenBooking }) {
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-center max-w-3xl mx-auto mb-10 sm:mb-16 leading-tight"
         >
-          Qu'est-ce que vous voulez faire ?
+          {t('adventures.coverflow_title')}
         </motion.h2>
 
         {/* 3D Coverflow Stage with Infinite Drag/Swipe */}

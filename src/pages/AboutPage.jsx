@@ -15,42 +15,44 @@ import {
   Globe 
 } from 'lucide-react';
 import { GUIDES } from '../data/mockData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
   const smoothEase = [0.16, 1, 0.3, 1];
+  const { t } = useLanguage();
 
   const pillars = [
     {
       icon: Heart,
-      title: "L'Hospitalité Akwaba",
-      desc: "En Côte d'Ivoire, « Akwaba » n'est pas qu'un mot de bienvenue : c'est une philosophie de vie. Nous vous accueillons comme un membre de la famille, avec une chaleur et une bienveillance légendaires.",
-      tag: "Cœur & Valeurs"
+      title: t('about.p1_title'),
+      desc: t('about.p1_desc'),
+      tag: t('about.p1_tag'),
     },
     {
       icon: Leaf,
-      title: "Tourisme Durable & Préservation",
-      desc: "Chaque itinéraire est pensé pour protéger les écosystèmes fragiles (forêts primaires, mangroves, faune sacrée) et soutenir directement l'économie des communautés locales.",
-      tag: "Éco-responsabilité"
+      title: t('about.p2_title'),
+      desc: t('about.p2_desc'),
+      tag: t('about.p2_tag'),
     },
     {
       icon: Compass,
-      title: "Immersion & Vérité Culturelle",
-      desc: "Nous rejetons le tourisme de surface. Nous vous ouvrons les portes des chefferies traditionnelles, des ateliers d'artisans séculaires et des maquis authentiques où bat le vrai cœur d'Éburnie.",
-      tag: "Authenticité"
+      title: t('about.p3_title'),
+      desc: t('about.p3_desc'),
+      tag: t('about.p3_tag'),
     },
     {
       icon: ShieldCheck,
-      title: "Sécurité & Confort VIP",
-      desc: "Tous nos guides sont agréés par le Ministère du Tourisme. Nos véhicules sont récents et climatisés, et nos équipes veillent sur vous 24h/24 pour une tranquillité d'esprit absolue.",
-      tag: "Excellence"
+      title: t('about.p4_title'),
+      desc: t('about.p4_desc'),
+      tag: t('about.p4_tag'),
     }
   ];
 
   const metrics = [
-    { value: "5 000+", label: "Voyageurs Émerveillés", sub: "Depuis notre création" },
-    { value: "15+", label: "Régions Explorées", sub: "Du littoral aux montagnes" },
-    { value: "99.4%", label: "Taux de Satisfaction", sub: "Avis voyageurs certifiés" },
-    { value: "100%", label: "Guides Locaux Experts", sub: "Accrédités Ministère du Tourisme" }
+    { value: "5 000+", label: t('about.m1_label'), sub: t('about.m1_sub') },
+    { value: "15+", label: t('about.m2_label'), sub: t('about.m2_sub') },
+    { value: "99.4%", label: t('about.m3_label'), sub: t('about.m3_sub') },
+    { value: "100%", label: t('about.m4_label'), sub: t('about.m4_sub') }
   ];
 
   return (
@@ -72,7 +74,7 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-semibold text-amber-400 mb-4 sm:mb-6 shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Notre Histoire & Mission</span>
+            <span>{t('about.tag')}</span>
           </motion.div>
 
           {/* Main Title */}
@@ -82,9 +84,9 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
             transition={{ duration: 0.7, delay: 0.08, ease: smoothEase }}
             className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.18] sm:leading-[1.14] mb-3 sm:mb-6"
           >
-            Révéler la Grandeur et l'Âme de la <br className="hidden sm:inline" />
+            {t('about.hero_title_p1')} <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-white">
-              Terre d’Éburnie
+              {t('about.hero_title_p2')}
             </span>
           </motion.h1>
 
@@ -95,7 +97,7 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
             transition={{ duration: 0.7, delay: 0.16, ease: smoothEase }}
             className="text-slate-300 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto px-2"
           >
-            Akwaba Tours est né d'une conviction profonde : la Côte d'Ivoire possède une richesse culturelle, humaine et naturelle incomparable qui mérite d'être découverte avec respect, passion et excellence.
+            {t('about.hero_sub')}
           </motion.p>
         </div>
 
@@ -118,16 +120,16 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
             <div className="absolute bottom-3.5 sm:bottom-8 left-3.5 sm:left-8 right-3.5 sm:right-8 flex flex-col sm:flex-row sm:items-end justify-between gap-3 z-10">
               <div className="max-w-xl text-white">
                 <span className="px-3 py-1 rounded-full bg-amber-400 text-slate-950 text-[10px] sm:text-xs font-bold uppercase tracking-wider inline-block mb-1.5 shadow-xs">
-                  Manifeste
+                  {t('about.manifesto')}
                 </span>
                 <p className="text-sm sm:text-xl md:text-2xl font-medium text-white tracking-tight leading-snug drop-shadow-md">
-                  « Nous ne faisons pas que guider des pas, nous tissons des liens inoubliables avec un peuple généreux. »
+                  {t('about.manifesto_quote')}
                 </p>
               </div>
 
               <div className="flex items-center gap-1.5 text-[10px] sm:text-xs font-medium text-slate-300 bg-black/70 backdrop-blur-md px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border border-white/15 self-start sm:self-auto shrink-0">
                 <Globe className="w-3.5 h-3.5 text-amber-400" />
-                <span>Siège à Abidjan & Antennes Régionales</span>
+                <span>{t('about.hubs_badge')}</span>
               </div>
             </div>
           </div>
@@ -146,26 +148,26 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
               className="lg:col-span-6 space-y-4 sm:space-y-6"
             >
               <div className="inline-flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
-                <span>— Genèse & Philosophie</span>
+                <span>{t('about.story_tag')}</span>
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-[38px] font-bold text-white tracking-tight leading-[1.2]">
-                Créé par des enfants du pays, pour les voyageurs du monde entier.
+                {t('about.story_title')}
               </h2>
               <p className="text-slate-300 text-sm sm:text-base md:text-lg font-light leading-relaxed">
-                Fondée par un collectif d'historiens, de guides naturalistes et de passionnés de la Côte d'Ivoire, <strong className="text-white font-medium">Akwaba Tours</strong> est née de la volonté d'offrir une alternative responsable au tourisme de masse.
+                {t('about.story_p1')}
               </p>
               <p className="text-slate-300 text-sm sm:text-base md:text-lg font-light leading-relaxed">
-                Des gratte-ciel scintillants du Plateau aux lagunes sauvages d'Assinie-Mafia, des collines brumeuses du Mont Tonkpi aux palais coloniaux de Grand-Bassam, nous créons des itinéraires cousus main qui célèbrent chaque facette de notre patrie.
+                {t('about.story_p2')}
               </p>
 
               <div className="pt-2 flex flex-wrap gap-2.5 sm:gap-4">
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0" />
-                  <span>100% Capital & Équipe Ivoirienne</span>
+                  <span>{t('about.reassurance_1')}</span>
                 </div>
                 <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200 bg-white/5 border border-white/10 rounded-full px-3 py-1.5">
                   <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 shrink-0" />
-                  <span>Respect des coutumes & chefferies</span>
+                  <span>{t('about.reassurance_2')}</span>
                 </div>
               </div>
             </motion.div>
@@ -187,15 +189,15 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
                   />
                 </div>
                 <div className="p-3.5 sm:p-5 md:p-6 rounded-[18px] sm:rounded-[24px] bg-[#111722] border border-white/10 text-center">
-                  <div className="text-xl sm:text-3xl font-extrabold text-amber-400 mb-0.5 sm:mb-1">12 Ans</div>
-                  <div className="text-[10px] sm:text-xs text-slate-300">D'expertise sur le terrain</div>
+                  <div className="text-xl sm:text-3xl font-extrabold text-amber-400 mb-0.5 sm:mb-1">{t('about.stat_years_title')}</div>
+                  <div className="text-[10px] sm:text-xs text-slate-300">{t('about.stat_years_sub')}</div>
                 </div>
               </div>
 
               <div className="space-y-3 sm:space-y-6 pt-5 sm:pt-10 md:pt-12">
                 <div className="p-3.5 sm:p-5 md:p-6 rounded-[18px] sm:rounded-[24px] bg-[#111722] border border-white/10 text-center">
-                  <div className="text-xl sm:text-3xl font-extrabold text-emerald-400 mb-0.5 sm:mb-1">Éthique</div>
-                  <div className="text-[10px] sm:text-xs text-slate-300">Retombées directes aux villages</div>
+                  <div className="text-xl sm:text-3xl font-extrabold text-emerald-400 mb-0.5 sm:mb-1">{t('about.stat_ethics_title')}</div>
+                  <div className="text-[10px] sm:text-xs text-slate-300">{t('about.stat_ethics_sub')}</div>
                 </div>
                 <div className="rounded-[18px] sm:rounded-[28px] overflow-hidden border border-white/10 shadow-xl aspect-[4/5] bg-black/40">
                   <img
@@ -210,14 +212,14 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
           </div>
         </section>
 
-        {/* --- 4. NOS 4 PILIERS FONDAMENTAUX (1 col Mobile, 2 cols Tablet, 4 cols Desktop) --- */}
+        {/* --- 4. NOS 4 PILIERS FONDAMENTAUX --- */}
         <section className="mb-14 sm:mb-20 md:mb-28">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase block mb-2">
-              Valeurs Fondatrices
+              {t('about.pillars_tag')}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
-              Ce qui guide chacun de nos voyages.
+              {t('about.pillars_title')}
             </h2>
           </div>
 
@@ -260,10 +262,10 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
           
           <div className="max-w-3xl mb-6 sm:mb-10 text-left">
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-amber-400 uppercase block mb-1.5">
-              Chiffres & Bilan
+              {t('about.metrics_tag')}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white tracking-tight">
-              Une confiance bâtie voyage après voyage.
+              {t('about.metrics_title')}
             </h2>
           </div>
 
@@ -284,15 +286,15 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
           </div>
         </section>
 
-        {/* --- 6. NOS GUIDES CERTIFIÉS (1 col Mobile, 2 cols Tablet, 3 cols Desktop) --- */}
+        {/* --- 6. NOS GUIDES CERTIFIÉS --- */}
         <section className="mb-14 sm:mb-20 md:mb-28">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-4 mb-6 sm:mb-10">
             <div>
               <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase block mb-1.5">
-                Les Visages d'Akwaba Tours
+                {t('about.guides_tag')}
               </span>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-                Rencontrez nos guides passionnés.
+                {t('about.guides_title')}
               </h2>
             </div>
 
@@ -300,7 +302,7 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
               onClick={() => onOpenBooking && onOpenBooking('Choix d\'un guide')}
               className="inline-flex items-center gap-2 text-xs font-bold text-amber-400 hover:text-amber-300 self-start sm:self-auto cursor-pointer py-1"
             >
-              <span>Réserver avec un guide</span>
+              <span>{t('about.guides_cta')}</span>
               <ArrowRight className="w-3.5 h-3.5" />
             </button>
           </div>
@@ -347,7 +349,7 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
                     onClick={() => onOpenBooking && onOpenBooking('', guide.name)}
                     className="py-1 px-2.5 rounded-lg bg-amber-400/10 hover:bg-amber-400/20 text-amber-400 hover:text-amber-300 font-semibold cursor-pointer text-xs transition-colors"
                   >
-                    Choisir ce guide →
+                    {t('about.choose_guide')}
                   </button>
                 </div>
               </motion.div>
@@ -365,26 +367,26 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
         >
           <div className="max-w-2xl mx-auto relative z-10">
             <span className="px-3.5 py-1.5 rounded-full bg-amber-400/20 border border-amber-400/30 text-amber-300 text-[11px] sm:text-xs font-bold uppercase tracking-wider inline-block mb-3">
-              Prêt pour l'Aventure ?
+              {t('about.cta_tag')}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white tracking-tight mb-2.5 sm:mb-4">
-              Votre séjour d'exception commence ici.
+              {t('about.cta_title')}
             </h2>
             <p className="text-slate-300 text-xs sm:text-sm md:text-base font-light mb-6 sm:mb-8 max-w-lg mx-auto">
-              Que vous rêviez d'une escapade balnéaire à Assinie, d'un pèlerinage architectural à Yamoussoukro ou d'une immersion dans les montagnes de Man, notre équipe vous accompagne.
+              {t('about.cta_sub')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
               <button
                 onClick={() => onOpenBooking && onOpenBooking()}
                 className="w-full sm:w-auto px-7 py-3 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-xl transition-all hover:scale-105 active:scale-95 cursor-pointer min-h-[44px] flex items-center justify-center"
               >
-                Planifier mon voyage sur-mesure
+                {t('about.cta_btn_custom')}
               </button>
               <button
                 onClick={() => onNavigateToDestinations && onNavigateToDestinations()}
                 className="w-full sm:w-auto px-7 py-3 rounded-full bg-white/10 hover:bg-white/15 text-white font-semibold text-xs sm:text-sm border border-white/15 transition-all hover:scale-105 active:scale-95 cursor-pointer min-h-[44px] flex items-center justify-center"
               >
-                Explorer le catalogue
+                {t('about.cta_btn_catalog')}
               </button>
             </div>
           </div>

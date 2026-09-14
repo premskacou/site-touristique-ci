@@ -1,46 +1,42 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Plus, Minus, ArrowUpRight, MessageCircle } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function FAQSection({ onOpenBooking }) {
-  const [openIndex, setOpenIndex] = useState(0); // Premier élément ouvert par défaut comme sur l'image de référence
+  const [openIndex, setOpenIndex] = useState(0); // Premier élément ouvert par défaut
+  const { t } = useLanguage();
 
   const faqs = [
     {
       id: 1,
-      question: 'Faut-il un visa pour voyager en Côte d’Ivoire ?',
-      answer:
-        "Oui, pour la plupart des voyageurs hors CEDEAO. La démarche est très rapide : une demande d'e-Visa s'effectue en ligne (sur le site officiel snedai.com). Vous recevez votre pré-approbation par email sous 48h, et votre visa biométrique vous est délivré dès votre atterrissage à l'Aéroport International Félix-Houphouët-Boigny d'Abidjan.",
+      question: t('faq.q1'),
+      answer: t('faq.a1'),
     },
     {
       id: 2,
-      question: 'Quels sont les vaccins obligatoires avant le départ ?',
-      answer:
-        'Le vaccin contre la fièvre jaune est strictement obligatoire et exigé dès l’atterrissage avec votre carnet de vaccination international jaune. Un traitement préventif antipaludique ainsi que des lotions anti-moustiques adaptées aux zones tropicales sont également vivement conseillés.',
+      question: t('faq.q2'),
+      answer: t('faq.a2'),
     },
     {
       id: 3,
-      question: 'Quelle est la meilleure période pour visiter la Terre d’Éburnie ?',
-      answer:
-        'La grande saison sèche, de novembre à avril, offre un ensoleillement idéal pour profiter des plages bordées de cocotiers d’Assinie et faire des randonnées dans les montagnes verdoyantes de Man. Le climat reste agréable et chaud toute l’année avec une richesse culturelle permanente.',
+      question: t('faq.q3'),
+      answer: t('faq.a3'),
     },
     {
       id: 4,
-      question: 'Quelle monnaie utilise-t-on et comment s’effectuent les paiements ?',
-      answer:
-        'La monnaie officielle est le Franc CFA (XOF). Les cartes bancaires internationales (Visa, Mastercard) sont acceptées dans les grands hôtels et restaurants d’Abidjan. Pour le quotidien, les marchés et les transports, les espèces et le paiement mobile (Wave, Orange Money) sont rois.',
+      question: t('faq.q4'),
+      answer: t('faq.a4'),
     },
     {
       id: 5,
-      question: 'Comment se déroulent les circuits et le transport sur place ?',
-      answer:
-        'Tous nos déplacements s’effectuent à bord de véhicules récents, climatisés et assurés tous risques, conduits par des chauffeurs locaux chevronnés. Vous êtes accompagnés par des guides certifiés et passionnés, avec une conciergerie locale dédiée disponible 24h/24 et 7j/7.',
+      question: t('faq.q5'),
+      answer: t('faq.a5'),
     },
     {
       id: 6,
-      question: 'Est-il possible de personnaliser un itinéraire 100% sur-mesure ?',
-      answer:
-        'Absolument ! Que vous voyagiez en solo, en couple, en famille ou en groupe, nos experts locaux conçoivent votre séjour sur-mesure selon vos envies (détente balnéaire à Assinie, trek à Man, patrimoine à Yamoussoukro ou gastronomie abidjanaise) et votre rythme.',
+      question: t('faq.q6'),
+      answer: t('faq.a6'),
     },
   ];
 
@@ -68,7 +64,7 @@ export default function FAQSection({ onOpenBooking }) {
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full border border-slate-200/90 bg-slate-50 text-xs font-medium text-slate-600 mb-6"
             >
               <span>—</span>
-              <span>Foire Aux Questions</span>
+              <span>{t('faq.tag')}</span>
             </motion.div>
 
             {/* Grand Titre (Slide vers le bas) */}
@@ -79,8 +75,8 @@ export default function FAQSection({ onOpenBooking }) {
               transition={{ duration: 0.8, delay: 0.1, ease: smoothEase }}
               className="text-3xl sm:text-4xl lg:text-[46px] font-bold tracking-tight text-slate-900 leading-[1.12] mb-6"
             >
-              Questions <br />
-              Fréquentes
+              {t('faq.title_1')} <br />
+              {t('faq.title_2')}
             </motion.h2>
 
             {/* Sous-titre / Description (Slide vers le bas) */}
@@ -91,7 +87,7 @@ export default function FAQSection({ onOpenBooking }) {
               transition={{ duration: 0.8, delay: 0.18, ease: smoothEase }}
               className="text-slate-600 text-base sm:text-lg leading-relaxed font-normal mb-10 max-w-md"
             >
-              Des réponses claires et précises aux interrogations les plus fréquentes pour préparer sereinement votre aventure en Côte d’Ivoire.
+              {t('faq.subtitle')}
             </motion.p>
 
             {/* Bloc d'aide WhatsApp / Contact direct */}
@@ -103,8 +99,8 @@ export default function FAQSection({ onOpenBooking }) {
               className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 max-w-md flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
             >
               <div>
-                <p className="text-xs text-slate-500 font-medium">Une question particulière ?</p>
-                <p className="text-sm font-semibold text-slate-800">Échangez avec nos experts ivoiriens</p>
+                <p className="text-xs text-slate-500 font-medium">{t('faq.help_title')}</p>
+                <p className="text-sm font-semibold text-slate-800">{t('faq.help_sub')}</p>
               </div>
 
               <a
@@ -114,7 +110,7 @@ export default function FAQSection({ onOpenBooking }) {
                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-bold text-xs transition-transform hover:scale-105 shrink-0 shadow-xs cursor-pointer"
               >
                 <MessageCircle className="w-3.5 h-3.5 fill-slate-950" />
-                <span>WhatsApp</span>
+                <span>{t('faq.whatsapp_btn')}</span>
               </a>
             </motion.div>
           </div>
@@ -198,14 +194,14 @@ export default function FAQSection({ onOpenBooking }) {
               className="mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-3"
             >
               <p className="text-xs sm:text-sm text-slate-500">
-                Vous préparez un voyage en groupe ou un séjour sur-mesure ?
+                {t('faq.custom_prompt')}
               </p>
               <button
                 type="button"
                 onClick={() => onOpenBooking && onOpenBooking('Projet Sur-Mesure')}
                 className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-[#1D71F2] hover:text-[#1560D6] group cursor-pointer shrink-0"
               >
-                <span>Demander un devis personnalisé</span>
+                <span>{t('faq.custom_cta')}</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
             </motion.div>

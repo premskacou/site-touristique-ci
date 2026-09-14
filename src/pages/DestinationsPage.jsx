@@ -2,22 +2,25 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Search, MapPin, Star, Calendar, Clock, ArrowRight, X, Compass, CheckCircle2, Sparkles, Filter } from 'lucide-react';
 import { DESTINATIONS } from '../data/mockData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function DestinationsPage({ onOpenBooking, onSelectDestination }) {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Tout');
+  const [selectedCategoryKey, setSelectedCategoryKey] = useState('all');
   const [activeModalDestination, setActiveModalDestination] = useState(null);
 
   const categories = [
-    'Tout',
-    'Plages & Écotourisme',
-    'Culture',
-    'Gastronomie',
-    'Business'
+    { key: 'all', label: t('destinations_page.cat_all', 'Tout'), filter: 'Tout' },
+    { key: 'beaches', label: t('destinations_page.cat_beaches', 'Plages & Écotourisme'), filter: 'Plages & Écotourisme' },
+    { key: 'culture', label: t('destinations_page.cat_culture', 'Culture'), filter: 'Culture' },
+    { key: 'gastronomy', label: t('destinations_page.cat_gastronomy', 'Gastronomie'), filter: 'Gastronomie' },
+    { key: 'business', label: t('destinations_page.cat_business', 'Business'), filter: 'Business' }
   ];
 
   const filteredDestinations = DESTINATIONS.filter((item) => {
-    const matchesCategory = selectedCategory === 'Tout' || item.category === selectedCategory;
+    const activeCategoryObj = categories.find((c) => c.key === selectedCategoryKey);
+    const matchesCategory = selectedCategoryKey === 'all' || item.category === activeCategoryObj?.filter;
     const matchesSearch =
       !searchTerm ||
       item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -47,7 +50,7 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-semibold text-amber-400 mb-4 sm:mb-6 shadow-xs"
           >
             <Compass className="w-3.5 h-3.5" />
-            <span>Catalogue Officiel des Destinations</span>
+            <span>{t('destinations_page.tag', 'Catalogue Officiel des Destinations')}</span>
           </motion.div>
 
           <motion.h1
@@ -56,9 +59,9 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
             transition={{ duration: 0.7, delay: 0.1, ease: smoothEase }}
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.14] mb-4 sm:mb-6"
           >
-            Explorez les Joyaux de la <br />
+            {t('destinations_page.title_p1', 'Explorez les Joyaux de la')} <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-white to-amber-200">
-              Terre d’Éburnie
+              {t('destinations_page.title_p2', 'Terre d’Éburnie')}
             </span>
           </motion.h1>
 
@@ -68,7 +71,7 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
             transition={{ duration: 0.7, delay: 0.18, ease: smoothEase }}
             className="text-slate-400 text-sm sm:text-base md:text-lg leading-relaxed font-normal px-2"
           >
-            Des lagunes scintillantes d’Assinie aux sommets majestueux de Man, planifiez votre prochaine escapade en Côte d’Ivoire avec nos experts locaux certifiés.
+            {t('destinations_page.sub', 'Des lagunes scintillantes d’Assinie aux sommets majestueux de Man, planifiez votre prochaine escapade en Côte d’Ivoire avec nos experts locaux certifiés.')}
           </motion.p>
         </div>
 
@@ -84,7 +87,7 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              placeholder="Rechercher une ville, une plage, une montagne..."
+              placeholder={t('destinations_page.search_placeholder', 'Rechercher une ville, une plage, une montagne...')}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full bg-transparent pl-11 pr-10 py-2.5 sm:py-3 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none"
@@ -102,11 +105,11 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
           {/* Category Filter Pills (Horizontal Scroll on Mobile) */}
           <div className="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0 px-1 md:px-0 scrollbar-none">
             {categories.map((cat) => {
-              const isActive = selectedCategory === cat;
+              const isActive = selectedCategoryKey === cat.key;
               return (
                 <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
+                  key={cat.key}
+                  onClick={() => setSelectedCategoryKey(cat.key)}
                   className={`relative px-3.5 sm:px-4 py-2 rounded-full text-xs font-semibold transition-colors shrink-0 cursor-pointer ${
                     isActive ? 'text-slate-950 font-bold' : 'text-slate-300 hover:text-white hover:bg-white/5'
                   }`}
@@ -118,7 +121,7 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
-                  <span className="relative z-10">{cat}</span>
+                  <span className="relative z-10">{cat.label}</span>
                 </button>
               );
             })}
@@ -128,14 +131,16 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
         {/* Counter Info */}
         <div className="flex items-center justify-between text-xs text-slate-400 mb-6 sm:mb-8 px-2">
           <span>
-            Affichage de <strong className="text-white font-semibold">{filteredDestinations.length}</strong> destination(s)
+            {t('destinations_page.showing_prefix', 'Affichage de')}{' '}
+            <strong className="text-white font-semibold">{filteredDestinations.length}</strong>{' '}
+            {t('destinations_page.showing_suffix', 'destination(s)')}
           </span>
           {searchTerm && (
             <button
               onClick={() => setSearchTerm('')}
               className="text-amber-400 hover:underline cursor-pointer"
             >
-              Effacer la recherche
+              {t('destinations_page.clear_search', 'Effacer la recherche')}
             </button>
           )}
         </div>
@@ -234,13 +239,13 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
                       onClick={() => onSelectDestination ? onSelectDestination(item.id) : setActiveModalDestination(item)}
                       className="flex-1 py-2.5 px-4 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-semibold transition-colors text-center cursor-pointer"
                     >
-                      Découvrir
+                      {t('destinations_page.discover', 'Découvrir')}
                     </button>
                     <button
                       onClick={() => onOpenBooking && onOpenBooking(item.name)}
                       className="flex-1 py-2.5 px-4 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold transition-all hover:scale-102 flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
                     >
-                      <span>Réserver</span>
+                      <span>{t('destinations_page.book', 'Réserver')}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
@@ -259,18 +264,18 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
             className="text-center py-20 bg-[#111722]/60 rounded-3xl border border-white/10 p-8 my-8"
           >
             <Compass className="w-12 h-12 text-amber-400 mx-auto mb-4 opacity-70" />
-            <h3 className="text-xl font-bold text-white mb-2">Aucune destination trouvée</h3>
+            <h3 className="text-xl font-bold text-white mb-2">{t('destinations_page.empty_title', 'Aucune destination trouvée')}</h3>
             <p className="text-sm text-slate-400 max-w-md mx-auto mb-6">
-              Aucun résultat ne correspond à votre recherche "{searchTerm}". Essayez un autre mot-clé ou réinitialisez les filtres.
+              {t('destinations_page.empty_desc', 'Aucun résultat ne correspond à votre recherche. Essayez un autre mot-clé ou réinitialisez les filtres.')}
             </p>
             <button
               onClick={() => {
                 setSearchTerm('');
-                setSelectedCategory('Tout');
+                setSelectedCategoryKey('all');
               }}
               className="px-6 py-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold cursor-pointer"
             >
-              Réinitialiser les filtres
+              {t('destinations_page.reset_filters', 'Réinitialiser les filtres')}
             </button>
           </motion.div>
         )}
@@ -318,7 +323,7 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
                       {activeModalDestination.category}
                     </span>
                     <span className="px-3 py-1 rounded-full bg-slate-950/80 text-white text-xs font-semibold border border-white/20">
-                      Région {activeModalDestination.region}
+                      {t('destinations_page.region_prefix', 'Région')} {activeModalDestination.region}
                     </span>
                   </div>
                   <h2 className="text-2xl sm:text-4xl font-extrabold text-white">
@@ -335,15 +340,15 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
               {/* Practical Info Box */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 p-4 rounded-2xl bg-white/[0.04] border border-white/5 mb-8 text-xs">
                 <div>
-                  <span className="text-slate-400 block mb-0.5">Meilleure période</span>
+                  <span className="text-slate-400 block mb-0.5">{t('destinations_page.modal_best_season', 'Meilleure période')}</span>
                   <span className="text-white font-semibold">{activeModalDestination.bestSeason}</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 block mb-0.5">Durée recommandée</span>
+                  <span className="text-slate-400 block mb-0.5">{t('destinations_page.modal_duration', 'Durée recommandée')}</span>
                   <span className="text-white font-semibold">{activeModalDestination.durationRecommended}</span>
                 </div>
                 <div className="col-span-2 sm:col-span-1">
-                  <span className="text-slate-400 block mb-0.5">Score voyageurs</span>
+                  <span className="text-slate-400 block mb-0.5">{t('destinations_page.modal_score', 'Score voyageurs')}</span>
                   <span className="text-amber-400 font-semibold">{activeModalDestination.rating} / 5</span>
                 </div>
               </div>
@@ -352,7 +357,7 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
               <div className="mb-8">
                 <h4 className="text-base font-bold text-white mb-4 flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-amber-400" />
-                  <span>Attractions & Expériences Incontournables</span>
+                  <span>{t('destinations_page.modal_attractions', 'Attractions & Expériences Incontournables')}</span>
                 </h4>
                 <div className="space-y-3">
                   {activeModalDestination.topAttractions.map((att, idx) => (
@@ -373,14 +378,14 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
               {/* Bottom Modal CTA */}
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
                 <p className="text-xs text-slate-400">
-                  Besoin d'un guide certifié pour cette région ?
+                  {t('destinations_page.modal_guide_needed', "Besoin d'un guide certifié pour cette région ?")}
                 </p>
                 <div className="flex items-center gap-3 w-full sm:w-auto">
                   <button
                     onClick={() => setActiveModalDestination(null)}
                     className="flex-1 sm:flex-none px-5 py-2.5 rounded-full bg-white/10 hover:bg-white/15 text-white text-xs font-semibold cursor-pointer"
                   >
-                    Fermer
+                    {t('destinations_page.modal_close', 'Fermer')}
                   </button>
                   <button
                     onClick={() => {
@@ -390,7 +395,7 @@ export default function DestinationsPage({ onOpenBooking, onSelectDestination })
                     }}
                     className="flex-1 sm:flex-none px-6 py-2.5 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md"
                   >
-                    <span>Réserver {activeModalDestination.name}</span>
+                    <span>{t('destinations_page.modal_book', 'Réserver')} {activeModalDestination.name}</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>

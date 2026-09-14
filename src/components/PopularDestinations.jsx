@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function PopularDestinations({ onOpenBooking, onNavigateToDestinations, onSelectDestination }) {
   const smoothEase = [0.16, 1, 0.3, 1];
+  const { t } = useLanguage();
 
   const badgeToIdMap = {
     'Abidjan': 'abidjan',
@@ -14,23 +16,26 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
   const destinations = [
     {
       id: 1,
-      badge: 'Abidjan',
-      title: 'Lagune Ébrié & Plateau',
-      places: '05 Lieux Visités',
+      badge: t('popular.abidjan_badge'),
+      slug: 'abidjan',
+      title: t('popular.abidjan_title'),
+      places: t('popular.abidjan_places'),
       image: '/images/hero_abidjan.jpg',
     },
     {
       id: 2,
-      badge: 'Yamoussoukro',
-      title: 'Basilique Notre-Dame de la Paix',
-      places: '03 Lieux Visités',
+      badge: t('popular.yamoussoukro_badge'),
+      slug: 'yamoussoukro',
+      title: t('popular.yamoussoukro_title'),
+      places: t('popular.yamoussoukro_places'),
       image: '/images/yamoussoukro_basilica.jpg',
     },
     {
       id: 3,
-      badge: 'Assinie-Mafia',
-      title: 'Plages & Cocoteraies d’Assinie',
-      places: '04 Lieux Visités',
+      badge: t('popular.assinie_badge'),
+      slug: 'assinie',
+      title: t('popular.assinie_title'),
+      places: t('popular.assinie_places'),
       image: '/images/assinie_beach.jpg',
     },
   ];
@@ -48,7 +53,7 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
           className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-slate-200/90 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-xs font-medium text-slate-600 mb-6"
         >
           <span>—</span>
-          <span>Destinations</span>
+          <span>{t('popular.tag')}</span>
         </motion.div>
 
         {/* Section Header: Title (Left) and Action Button (Right) */}
@@ -60,7 +65,7 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
             transition={{ duration: 0.8, delay: 0.05, ease: smoothEase }}
             className="text-2xl sm:text-4xl md:text-[42px] font-bold tracking-tight text-slate-900"
           >
-            Destinations les Plus Populaires
+            {t('popular.title')}
           </motion.h2>
 
           <motion.div
@@ -75,7 +80,7 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center gap-3 pl-5 pr-2 py-1.5 rounded-full border border-slate-200 bg-white hover:border-slate-300 text-slate-700 text-xs sm:text-sm font-medium shadow-[0_2px_6px_rgba(0,0,0,0.04)] transition-all duration-300 group cursor-pointer"
             >
-              <span>Voir Toutes les Destinations</span>
+              <span>{t('popular.view_all')}</span>
               <span className="w-8 h-8 rounded-full bg-[#1D71F2] text-white flex items-center justify-center transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
                 <ArrowUpRight className="w-4 h-4" />
               </span>
@@ -99,7 +104,7 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
               whileHover={{ y: -8, transition: { duration: 0.35, ease: 'easeOut' } }}
               onClick={() => {
                 if (onSelectDestination) {
-                  onSelectDestination(badgeToIdMap[dest.badge] || dest.badge.toLowerCase());
+                  onSelectDestination(dest.slug || badgeToIdMap[dest.badge] || dest.badge.toLowerCase());
                 } else if (onOpenBooking) {
                   onOpenBooking(dest.badge);
                 }

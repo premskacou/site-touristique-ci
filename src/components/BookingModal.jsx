@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Sparkles, Calendar, Users, MapPin, Send, CheckCircle2, PhoneCall } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { GUIDES } from '../data/mockData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function BookingModal({ isOpen, onClose, initialDestination, initialGuide }) {
+  const { t } = useLanguage();
   const [destination, setDestination] = useState(initialDestination || 'Abidjan & Environs');
-  const [guide, setGuide] = useState(initialGuide || 'Guide attribué selon disponibilité');
+  const [guide, setGuide] = useState(initialGuide || t('booking.opt_best_guide'));
   const [fullName, setFullName] = useState('');
   const [phone, setPhone] = useState('');
   const [travelDate, setTravelDate] = useState('');
@@ -55,7 +57,7 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
           {/* Close button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-white"
+            className="absolute top-4 right-4 p-2 rounded-full bg-slate-900 border border-slate-800 text-slate-400 hover:text-white cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -64,18 +66,18 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
             <div>
               <div className="flex items-center gap-2 text-akwaba-gold font-bold text-xs uppercase tracking-wider mb-2">
                 <Sparkles className="w-4 h-4" />
-                <span>Réservation Privée VIP</span>
+                <span>{t('booking.tag')}</span>
               </div>
               <h3 className="text-2xl font-black text-white">
-                Votre Séjour en Côte d'Ivoire
+                {t('booking.title')}
               </h3>
               <p className="text-xs text-slate-400 mt-1 mb-6">
-                Remplissez vos préférences, notre équipe ou votre guide vous recontactera sous 1 heure.
+                {t('booking.sub')}
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                  <label className="text-xs font-bold text-slate-300 block mb-1">Votre Nom & Prénom *</label>
+                  <label className="text-xs font-bold text-slate-300 block mb-1">{t('booking.name_label')}</label>
                   <input
                     type="text"
                     required
@@ -87,7 +89,7 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-300 block mb-1">Téléphone / WhatsApp *</label>
+                  <label className="text-xs font-bold text-slate-300 block mb-1">{t('booking.phone_label')}</label>
                   <input
                     type="tel"
                     required
@@ -100,7 +102,7 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs font-bold text-slate-300 block mb-1">Destination</label>
+                    <label className="text-xs font-bold text-slate-300 block mb-1">{t('booking.dest_label')}</label>
                     <input
                       type="text"
                       value={destination}
@@ -109,28 +111,28 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
                     />
                   </div>
                   <div>
-                    <label className="text-xs font-bold text-slate-300 block mb-1">Nombre de personnes</label>
+                    <label className="text-xs font-bold text-slate-300 block mb-1">{t('booking.guests_label')}</label>
                     <select
                       value={guests}
                       onChange={(e) => setGuests(e.target.value)}
                       className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-akwaba-gold"
                     >
-                      <option value="1">1 Personne (Solo)</option>
-                      <option value="2">2 Personnes (Duo)</option>
-                      <option value="4">3 à 5 Personnes</option>
-                      <option value="8">Groupe (6+)</option>
+                      <option value="1">{t('booking.opt_solo')}</option>
+                      <option value="2">{t('booking.opt_duo')}</option>
+                      <option value="4">{t('booking.opt_small')}</option>
+                      <option value="8">{t('booking.opt_group')}</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-300 block mb-1">Guide souhaité</label>
+                  <label className="text-xs font-bold text-slate-300 block mb-1">{t('booking.guide_label')}</label>
                   <select
                     value={guide}
                     onChange={(e) => setGuide(e.target.value)}
                     className="w-full bg-slate-900 border border-slate-700 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-akwaba-gold"
                   >
-                    <option value="Guide attribué selon disponibilité">Attribuer le meilleur guide disponible</option>
+                    <option value={t('booking.opt_best_guide')}>{t('booking.opt_best_guide')}</option>
                     {GUIDES.map((g) => (
                       <option key={g.id} value={g.name}>{g.name} ({g.specialty})</option>
                     ))}
@@ -138,7 +140,7 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold text-slate-300 block mb-1">Date souhaitée</label>
+                  <label className="text-xs font-bold text-slate-300 block mb-1">{t('booking.date_label')}</label>
                   <input
                     type="date"
                     value={travelDate}
@@ -149,10 +151,10 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 mt-2 bg-gradient-to-r from-akwaba-gold to-amber-500 text-slate-950 font-extrabold rounded-xl shadow-lg shadow-akwaba-gold/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-sm"
+                  className="w-full py-3.5 mt-2 bg-gradient-to-r from-akwaba-gold to-amber-500 text-slate-950 font-extrabold rounded-xl shadow-lg shadow-akwaba-gold/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-2 text-sm cursor-pointer"
                 >
                   <Send className="w-4 h-4 text-slate-950" />
-                  <span>Confirmer la demande</span>
+                  <span>{t('booking.submit')}</span>
                 </button>
               </form>
             </div>
@@ -161,18 +163,18 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
               <div className="w-16 h-16 rounded-full bg-akwaba-green/20 border border-akwaba-green text-akwaba-green flex items-center justify-center mx-auto mb-4 animate-bounce">
                 <CheckCircle2 className="w-8 h-8" />
               </div>
-              <h3 className="text-2xl font-black text-white">Demande Enregistrée !</h3>
+              <h3 className="text-2xl font-black text-white">{t('booking.success_title')}</h3>
               <p className="text-xs text-slate-300 mt-2 leading-relaxed">
-                Merci <span className="font-bold text-akwaba-gold">{fullName}</span>. Notre équipe prépare votre accueil en Côte d'Ivoire.
+                {t('booking.success_sub')}
               </p>
 
               <div className="mt-6 space-y-3">
                 <button
                   onClick={handleWhatsAppRedirect}
-                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg"
+                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg cursor-pointer"
                 >
                   <PhoneCall className="w-4 h-4" />
-                  <span>Ouvrir dans WhatsApp (Réponse Instantanée)</span>
+                  <span>{t('booking.whatsapp_chat_now')}</span>
                 </button>
 
                 <button
@@ -180,9 +182,9 @@ export default function BookingModal({ isOpen, onClose, initialDestination, init
                     setSubmitted(false);
                     onClose();
                   }}
-                  className="w-full py-2.5 bg-slate-900 border border-slate-800 text-slate-400 font-semibold rounded-xl text-xs"
+                  className="w-full py-2.5 bg-slate-900 border border-slate-800 text-slate-400 font-semibold rounded-xl text-xs cursor-pointer"
                 >
-                  Fermer la fenêtre
+                  {t('booking.close')}
                 </button>
               </div>
             </div>

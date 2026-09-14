@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function WhoWeAre({ onNavigateAbout }) {
   const smoothEase = [0.16, 1, 0.3, 1];
+  const { t } = useLanguage();
 
-  const headlineWords = "Née d'une passion authentique, notre mission est de révéler toute la splendeur de la Terre d'Éburnie. Aujourd'hui, nous sommes la référence des voyages et expéditions d'exception en Côte d'Ivoire".split(" ");
+  const headlineWords = t('who_we_are.headline').split(" ");
 
   return (
     <section className="bg-[#FFFFFF] text-slate-900 py-16 sm:py-24 px-4 sm:px-6 lg:px-8 select-none overflow-hidden">
@@ -20,14 +22,14 @@ export default function WhoWeAre({ onNavigateAbout }) {
           className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-slate-200/90 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.04)] text-xs font-medium text-slate-600 mb-8"
         >
           <span>—</span>
-          <span>Qui Sommes-Nous</span>
+          <span>{t('who_we_are.tag')}</span>
         </motion.div>
 
         {/* Main Headline with Animated Read-Along Wave */}
         <h2 className="max-w-4xl mx-auto text-center font-bold text-2xl sm:text-3xl md:text-[38px] lg:text-[42px] leading-[1.3] tracking-tight mb-8 px-2 flex flex-wrap justify-center">
           {headlineWords.map((word, index) => (
             <motion.span
-              key={index}
+              key={`${word}-${index}`}
               initial={{ color: "#CBD5E1" }}
               whileInView={{ color: "#0F172A" }}
               viewport={{ once: true, margin: "-40px" }}
@@ -57,7 +59,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
             whileTap={{ scale: 0.98 }}
             className="inline-flex items-center gap-3 pl-6 pr-2.5 py-2 rounded-full bg-[#1D71F2] hover:bg-[#1560D6] text-white font-medium text-sm shadow-[0_8px_20px_rgba(29,113,242,0.28)] transition-all duration-300 group cursor-pointer"
           >
-            <span>En Savoir Plus</span>
+            <span>{t('who_we_are.learn_more')}</span>
             <span className="w-8 h-8 rounded-full bg-white/20 group-hover:bg-white text-white group-hover:text-[#1D71F2] flex items-center justify-center transition-all duration-300">
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </span>
@@ -82,7 +84,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
                 5000<span className="text-[#1D71F2] font-semibold">+</span>
               </div>
               <div className="text-slate-500 font-medium text-sm sm:text-base">
-                Voyageurs Émerveillés
+                {t('who_we_are.stat1_label')}
               </div>
             </div>
 
@@ -90,7 +92,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
             <div className="w-full rounded-[22px] overflow-hidden aspect-[16/10] relative shadow-sm">
               <img
                 src="/images/campers_sunset.jpg"
-                alt="Voyageurs Émerveillés en Côte d'Ivoire"
+                alt={t('who_we_are.stat1_label')}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -109,7 +111,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
           >
             <img
               src="/images/hikers_trail.jpg"
-              alt="Expéditions Nature en Terre d'Éburnie"
+              alt={t('who_we_are.stat2_title')}
               loading="lazy"
               decoding="async"
               className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -131,7 +133,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
             <div className="w-full rounded-[22px] overflow-hidden aspect-[16/10] relative shadow-sm mb-6">
               <img
                 src="/images/smiling_hikers.jpg"
-                alt="Satisfaction de nos Aventuriers"
+                alt={t('who_we_are.stat3_label')}
                 loading="lazy"
                 decoding="async"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -144,7 +146,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
                 100<span className="text-[#1D71F2] font-semibold">%</span>
               </div>
               <div className="text-slate-500 font-medium text-sm sm:text-base">
-                Satisfaction Garantie
+                {t('who_we_are.stat3_label')}
               </div>
             </div>
           </motion.div>

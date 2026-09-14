@@ -1,6 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
-export default function Hero({ onSearchDestination }) {
+export default function Hero({ onSearchDestination, onOpenBooking }) {
+  const { t } = useLanguage();
   const [offset, setOffset] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -255,13 +257,13 @@ export default function Hero({ onSearchDestination }) {
           className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.14]"
           style={{ textShadow: '0 4px 24px rgba(0,0,0,0.9)' }}
         >
-          L'Aventure Vous Attend en <br />
-          <span className="text-white">Terre d'Éburnie</span>
+          {t('hero.title_p1')} <br />
+          <span className="text-white">{t('hero.title_p2')}</span>
         </h1>
 
         {/* Subtitle Paragraph */}
         <p className="mt-2 sm:mt-3 text-xs sm:text-sm md:text-base text-slate-300/85 max-w-2xl font-normal leading-relaxed text-center px-4 line-clamp-3 sm:line-clamp-none">
-          Explorez la Côte d'Ivoire avec nos guides passionnés et circuits d'exception. Des lagunes scintillantes d'Abidjan aux plages dorées d'Assinie, en passant par les cascades de Man et les maquis animés.
+          {t('hero.subtitle')}
         </p>
 
         {/* Action Link for Desktop: "○ Commencer l'Aventure" (Exact original design) */}
@@ -279,7 +281,7 @@ export default function Hero({ onSearchDestination }) {
             </svg>
           </span>
           <span className="text-xs sm:text-sm font-medium text-white border-b border-amber-400/80 pb-0.5 transition-all duration-300 group-hover:text-white group-hover:border-transparent">
-            Commencer l'Aventure
+            {t('hero.cta')}
           </span>
         </a>
 
@@ -386,7 +388,7 @@ export default function Hero({ onSearchDestination }) {
         {/* Mobile Swipe Hint */}
         <div className="flex sm:hidden items-center gap-2 mt-2 text-[11px] text-amber-300/80 font-medium tracking-wide">
           <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
-          <span>Faites glisser pour explorer les destinations</span>
+          <span>{t('hero.swipe_hint')}</span>
         </div>
 
         {/* Action Button for Mobile only (under cards and hint) */}
@@ -394,7 +396,7 @@ export default function Hero({ onSearchDestination }) {
           href="#destinations"
           className="flex sm:hidden mt-3.5 items-center gap-2.5 px-7 py-2.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold text-xs shadow-[0_4px_24px_rgba(247,147,30,0.35)] transition-all active:scale-95 group cursor-pointer z-30 pointer-events-auto"
         >
-          <span>Commencer l'Aventure</span>
+          <span>{t('hero.cta')}</span>
           <svg
             className="w-4 h-4 text-slate-950 transition-transform group-hover:translate-x-1"
             fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}

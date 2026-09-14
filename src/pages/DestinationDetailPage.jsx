@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Star, ArrowRight } from 'lucide-react';
 import { DESTINATIONS } from '../data/mockData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function DestinationDetailPage({ destinationId, onBack, onOpenBooking, onNavigateHome }) {
+  const { t } = useLanguage();
   const smoothEase = [0.16, 1, 0.3, 1];
 
   // Find destination by id, fallback to first if not found
@@ -52,17 +54,17 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
             className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white font-medium border border-white/10 transition-all hover:-translate-x-1 cursor-pointer group self-start"
           >
             <ArrowLeft className="w-3.5 h-3.5 transition-transform group-hover:-translate-x-0.5" />
-            <span>Retour aux destinations</span>
+            <span>{t('destination_detail.back', 'Retour aux destinations')}</span>
           </button>
 
           {/* Breadcrumbs */}
           <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs text-slate-400">
             <button onClick={onNavigateHome} className="hover:text-white transition-colors cursor-pointer">
-              Accueil
+              {t('destination_detail.home', 'Accueil')}
             </button>
             <span>/</span>
             <button onClick={onBack} className="hover:text-white transition-colors cursor-pointer">
-              Destinations
+              {t('destination_detail.destinations', 'Destinations')}
             </button>
             <span>/</span>
             <span className="text-amber-400 font-semibold">{destination.name}</span>
@@ -82,12 +84,12 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
               {destination.category}
             </span>
             <span className="px-3 py-1 rounded-full bg-white/10 border border-white/15 text-white text-[11px] sm:text-xs font-medium backdrop-blur-md">
-              Région {destination.region}
+              {t('destination_detail.region_prefix', 'Région')} {destination.region}
             </span>
             <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/15 text-white text-[11px] sm:text-xs font-semibold backdrop-blur-md">
               <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
               <span>{destination.rating}</span>
-              <span className="text-slate-400 text-[10px]">({destination.reviewsCount} avis)</span>
+              <span className="text-slate-400 text-[10px]">({destination.reviewsCount} {t('destination_detail.reviews_count', 'avis')})</span>
             </div>
           </div>
 
@@ -137,7 +139,7 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
                 onClick={() => onOpenBooking && onOpenBooking(destination.name)}
                 className="px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5 text-xs shrink-0"
               >
-                <span>Réserver</span>
+                <span>{t('destination_detail.book', 'Réserver')}</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -167,11 +169,10 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
           {/* Eyebrow & Title */}
           <div className="mb-6 sm:mb-10 text-left">
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase block mb-2">
-              Perspectives
+              {t('destination_detail.perspectives_tag', 'Perspectives')}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-white leading-tight">
-              Découvrez les temps forts <br />
-              et ambiances de ce lieu.
+              {t('destination_detail.perspectives_title', 'Découvrez les temps forts et ambiances de ce lieu.')}
             </h2>
           </div>
 
@@ -207,7 +208,7 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
                   {/* Bottom title & label */}
                   <div className="absolute bottom-4 left-4 right-4 z-10 text-white pointer-events-none">
                     <span className="text-[10px] sm:text-[11px] text-slate-300/80 uppercase tracking-widest block font-semibold mb-0.5">
-                      Vue 0{index + 1}
+                      {t('destination_detail.view_prefix', 'Vue')} 0{index + 1}
                     </span>
                     <h3 className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-amber-300 transition-colors line-clamp-1">
                       {photo.title}
@@ -230,11 +231,11 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
           {/* Eyebrow & Title */}
           <div className="mb-8 sm:mb-12 text-left">
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase block mb-2">
-              Témoignages & Expériences
+              {t('destination_detail.testimonials_tag', 'Témoignages & Expériences')}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium tracking-tight text-white leading-tight">
-              Ce que nos voyageurs <br />
-              ont vécu à {destination.name}.
+              {t('destination_detail.testimonials_title_p1', 'Ce que nos voyageurs')} <br />
+              {t('destination_detail.testimonials_title_p2', 'ont vécu à')} {destination.name}.
             </h2>
           </div>
 
@@ -314,7 +315,7 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
 
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-[11px] font-medium self-start sm:self-auto">
                     <span>✓</span>
-                    <span>Visite vérifiée</span>
+                    <span>{t('destination_detail.verified_visit', 'Visite vérifiée')}</span>
                   </span>
                 </div>
               </motion.div>
@@ -332,7 +333,7 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
         >
           {/* Eyebrow Label */}
           <p className="text-xs sm:text-sm text-slate-400 font-normal mb-5 tracking-wide">
-            Ce lieu met à l'honneur...
+            {t('destination_detail.highlights_tag', "Ce lieu met à l'honneur...")}
           </p>
 
           {/* Centered Pill Tags Cloud */}

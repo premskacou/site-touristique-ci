@@ -17,9 +17,11 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { DESTINATIONS } from '../data/mockData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function ContactPage({ onNavigateToDestinations }) {
   const smoothEase = [0.16, 1, 0.3, 1];
+  const { t } = useLanguage();
 
   // Form State
   const [formData, setFormData] = useState({
@@ -62,28 +64,28 @@ export default function ContactPage({ onNavigateToDestinations }) {
       city: "Abidjan (Siège Central)",
       district: "Cocody Ambassades & Plateau",
       address: "Boulevard Hassan II, Résidence Akwaba",
-      role: "Direction générale & Conciergerie 24/7",
+      role: t('contact.hub_abidjan_role'),
       phone: "+225 27 20 00 00 00"
     },
     {
       city: "Assinie-Mafia",
       district: "Presqu'île & Lagune Aby",
       address: "Km 12, Route de Mafia",
-      role: "Accueil écolodges & transfert nautique",
+      role: t('contact.hub_assinie_role'),
       phone: "+225 07 10 00 00 00"
     },
     {
       city: "Grand-Bassam",
       district: "Quartier France UNESCO",
       address: "Rue Bouët, face Ancien Phare",
-      role: "Bureau d'excursions historiques",
+      role: t('contact.hub_bassam_role'),
       phone: "+225 07 20 00 00 00"
     },
     {
       city: "Yamoussoukro",
       district: "Quartier Administratif",
       address: "Allée des Fondations",
-      role: "Guidage Basilique & Centre culturel",
+      role: t('contact.hub_yakro_role'),
       phone: "+225 07 30 00 00 00"
     }
   ];
@@ -106,7 +108,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-semibold text-amber-400 mb-4 sm:mb-6 shadow-xs"
           >
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Conciergerie & Service Sur-Mesure</span>
+            <span>{t('contact.tag')}</span>
           </motion.div>
 
           <motion.h1
@@ -115,9 +117,9 @@ export default function ContactPage({ onNavigateToDestinations }) {
             transition={{ duration: 0.7, delay: 0.08, ease: smoothEase }}
             className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.14] mb-4 sm:mb-6 break-words"
           >
-            Commençons à Bâtir Votre Voyage en <br className="hidden sm:inline" />
+            {t('contact.hero_title_p1')} <br className="hidden sm:inline" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-200 to-white">
-              Terre d’Éburnie
+              {t('contact.hero_title_p2')}
             </span>
           </motion.h1>
 
@@ -127,7 +129,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
             transition={{ duration: 0.7, delay: 0.16, ease: smoothEase }}
             className="text-slate-300 text-sm sm:text-base md:text-lg font-light leading-relaxed max-w-2xl mx-auto px-2"
           >
-            Une question sur une destination ? Une envie d'escapade privée ou un projet de voyage en famille ? Nos conseillers locaux basés à Abidjan vous répondent sous 1 heure.
+            {t('contact.hero_sub')}
           </motion.p>
         </div>
 
@@ -148,16 +150,16 @@ export default function ContactPage({ onNavigateToDestinations }) {
               <div className="flex items-center justify-between mb-5">
                 <span className="px-3 py-1 rounded-full bg-[#25D366]/15 border border-[#25D366]/30 text-[#25D366] text-xs font-bold flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-[#25D366] animate-ping inline-block" />
-                  Conseillers en ligne
+                  {t('contact.online_status')}
                 </span>
                 <span className="text-xs text-slate-400 font-mono">24/7</span>
               </div>
 
               <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
-                Échangez en direct sur WhatsApp
+                {t('contact.whatsapp_title')}
               </h3>
               <p className="text-slate-300 text-xs sm:text-sm font-light leading-relaxed mb-6">
-                Le moyen le plus rapide pour obtenir un devis personnalisé, poser une question ou valider un itinéraire en quelques minutes.
+                {t('contact.whatsapp_sub')}
               </p>
 
               <button
@@ -165,7 +167,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                 className="w-full py-3.5 px-4 sm:px-6 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-bold text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] active:scale-98 cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4 fill-slate-950 text-slate-950 shrink-0" />
-                <span className="truncate sm:whitespace-normal">Discuter sur WhatsApp (+225 07 00...)</span>
+                <span className="truncate sm:whitespace-normal">{t('contact.whatsapp_btn')}</span>
                 <ArrowUpRight className="w-4 h-4 shrink-0" />
               </button>
             </div>
@@ -173,7 +175,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
             {/* Direct Contact Cards */}
             <div className="p-5 sm:p-8 rounded-[24px] sm:rounded-[32px] bg-[#111722] border border-white/10 shadow-xl space-y-5 sm:space-y-6">
               <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-4">
-                Nos Coordonnées Directes
+                {t('contact.direct_title')}
               </h3>
 
               {/* Phone */}
@@ -183,7 +185,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                 </div>
                 <div>
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
-                    Téléphone Direct
+                    {t('contact.phone_label')}
                   </span>
                   <a
                     href="tel:+2252720000000"
@@ -191,7 +193,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                   >
                     +225 27 20 00 00 00
                   </a>
-                  <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">Ligne fixe Abidjan (8h - 20h GMT)</p>
+                  <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">{t('contact.phone_sub')}</p>
                 </div>
               </div>
 
@@ -202,7 +204,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                 </div>
                 <div className="min-w-0 flex-1">
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
-                    Email Conciergerie
+                    {t('contact.email_label')}
                   </span>
                   <a
                     href="mailto:contact@akwabatours.ci"
@@ -210,7 +212,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                   >
                     contact@akwabatours.ci
                   </a>
-                  <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">Réponse garantie en moins de 1h</p>
+                  <p className="text-[11px] sm:text-xs text-slate-400 mt-0.5">{t('contact.email_sub')}</p>
                 </div>
               </div>
 
@@ -221,7 +223,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                 </div>
                 <div>
                   <span className="text-[10px] sm:text-[11px] font-semibold text-slate-400 uppercase tracking-wider block">
-                    Siège Social
+                    {t('contact.location_label')}
                   </span>
                   <span className="text-sm sm:text-base font-semibold text-white block leading-snug">
                     Boulevard Hassan II, Cocody Ambassades
@@ -245,13 +247,13 @@ export default function ContactPage({ onNavigateToDestinations }) {
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <span className="text-xs font-semibold text-amber-400 uppercase tracking-wider block mb-1">
-                      Devis Sur-Mesure & Échanges
+                      {t('contact.form_tag')}
                     </span>
                     <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
-                      Parlez-nous de votre projet de voyage
+                      {t('contact.form_title')}
                     </h2>
                     <p className="text-xs sm:text-sm text-slate-400 mt-1 font-light">
-                      Chaque voyage est unique. Donnez-nous quelques détails pour que nous préparions votre séjour idéal.
+                      {t('contact.form_sub')}
                     </p>
                   </div>
 
@@ -259,7 +261,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-semibold text-slate-300 block mb-2">
-                        Nom complet *
+                        {t('contact.name_field')}
                       </label>
                       <input
                         type="text"
@@ -274,7 +276,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
 
                     <div>
                       <label className="text-xs font-semibold text-slate-300 block mb-2">
-                        Téléphone / WhatsApp *
+                        {t('contact.phone_field')}
                       </label>
                       <input
                         type="tel"
@@ -292,7 +294,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-semibold text-slate-300 block mb-2">
-                        Adresse Email *
+                        {t('contact.email_field')}
                       </label>
                       <input
                         type="email"
@@ -307,7 +309,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
 
                     <div>
                       <label className="text-xs font-semibold text-slate-300 block mb-2">
-                        Période envisagée
+                        {t('contact.date_field')}
                       </label>
                       <input
                         type="text"
@@ -324,7 +326,7 @@ export default function ContactPage({ onNavigateToDestinations }) {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-xs font-semibold text-slate-300 block mb-2">
-                        Destination Prioritaire
+                        {t('contact.dest_field')}
                       </label>
                       <select
                         name="destination"
@@ -338,17 +340,17 @@ export default function ContactPage({ onNavigateToDestinations }) {
                           </option>
                         ))}
                         <option value="Circuit Multi-Destinations" className="bg-[#111722] text-white">
-                          Circuit Complet (Plusieurs villes)
+                          {t('contact.opt_multi')}
                         </option>
                         <option value="Sur-Mesure Total" className="bg-[#111722] text-white">
-                          Autre / Sur-Mesure Total
+                          {t('contact.opt_custom')}
                         </option>
                       </select>
                     </div>
 
                     <div>
                       <label className="text-xs font-semibold text-slate-300 block mb-2">
-                        Type de voyage & Nombre
+                        {t('contact.type_field')}
                       </label>
                       <select
                         name="travelType"
@@ -356,11 +358,11 @@ export default function ContactPage({ onNavigateToDestinations }) {
                         onChange={handleChange}
                         className="w-full bg-[#171E27] border border-white/10 rounded-2xl px-4 py-3 text-sm text-white focus:outline-none focus:border-amber-400/70 transition-colors cursor-pointer"
                       >
-                        <option value="Solo" className="bg-[#111722] text-white">Voyage Solo (1 personne)</option>
-                        <option value="Couple" className="bg-[#111722] text-white">En Couple (2 personnes)</option>
-                        <option value="Famille" className="bg-[#111722] text-white">En Famille (3 à 5 personnes)</option>
-                        <option value="Groupe d'amis" className="bg-[#111722] text-white">Groupe d'Amis (6+ personnes)</option>
-                        <option value="Affaires VIP" className="bg-[#111722] text-white">Voyage d'Affaires & VIP</option>
+                        <option value="Solo" className="bg-[#111722] text-white">{t('contact.type_solo')}</option>
+                        <option value="Couple" className="bg-[#111722] text-white">{t('contact.type_couple')}</option>
+                        <option value="Famille" className="bg-[#111722] text-white">{t('contact.type_family')}</option>
+                        <option value="Groupe d'amis" className="bg-[#111722] text-white">{t('contact.type_friends')}</option>
+                        <option value="Affaires VIP" className="bg-[#111722] text-white">{t('contact.type_vip')}</option>
                       </select>
                     </div>
                   </div>
@@ -368,14 +370,14 @@ export default function ContactPage({ onNavigateToDestinations }) {
                   {/* Message */}
                   <div>
                     <label className="text-xs font-semibold text-slate-300 block mb-2">
-                      Vos envies, souhaits ou questions
+                      {t('contact.message_field')}
                     </label>
                     <textarea
                       name="message"
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Ex: Nous aimerions passer 3 jours à Assinie en écolodge, puis visiter la Basilique de Yamoussoukro avec un guide privé..."
+                      placeholder={t('contact.message_placeholder')}
                       className="w-full bg-[#171E27] border border-white/10 rounded-2xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400/70 transition-colors resize-none"
                     />
                   </div>
@@ -386,11 +388,11 @@ export default function ContactPage({ onNavigateToDestinations }) {
                     className="w-full py-3.5 sm:py-4 px-5 sm:px-8 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs sm:text-sm shadow-xl flex items-center justify-center gap-2 transition-all hover:scale-[1.01] active:scale-98 cursor-pointer min-h-[48px]"
                   >
                     <Send className="w-4 h-4 shrink-0" />
-                    <span>Envoyer ma demande de voyage sur-mesure</span>
+                    <span>{t('contact.submit_btn')}</span>
                   </button>
 
                   <p className="text-[11px] text-center text-slate-400">
-                    Vos données sont confidentielles. Devis 100% gratuit et sans engagement sous 1 heure.
+                    {t('contact.guarantee')}
                   </p>
                 </form>
               ) : (
@@ -406,13 +408,13 @@ export default function ContactPage({ onNavigateToDestinations }) {
 
                   <div>
                     <span className="px-3.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider inline-block mb-2.5 sm:mb-3">
-                      Demande Reçue avec Succès
+                      {t('contact.success_tag')}
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-2">
-                      Akwaba {formData.fullName || 'cher voyageur'} !
+                      {t('contact.success_title')}
                     </h3>
                     <p className="text-slate-300 text-xs sm:text-sm md:text-base max-w-md mx-auto font-light leading-relaxed">
-                      Notre conseiller spécialiste de <strong className="text-amber-400">{formData.destination}</strong> prend en charge votre projet. Vous recevrez une proposition personnalisée d'ici 1 heure.
+                      {t('contact.success_sub')}
                     </p>
                   </div>
 
@@ -422,14 +424,14 @@ export default function ContactPage({ onNavigateToDestinations }) {
                       className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-[#25D366] hover:bg-[#20ba59] text-slate-950 font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer min-h-[44px]"
                     >
                       <MessageSquare className="w-4 h-4 fill-slate-950" />
-                      <span>Échanger tout de suite sur WhatsApp</span>
+                      <span>{t('contact.success_whatsapp_btn')}</span>
                     </button>
 
                     <button
                       onClick={() => setSubmitted(false)}
                       className="w-full sm:w-auto px-6 py-3 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-medium text-xs border border-white/15 cursor-pointer min-h-[44px]"
                     >
-                      Nouvelle demande
+                      {t('contact.success_new_btn')}
                     </button>
                   </div>
                 </motion.div>
@@ -444,13 +446,13 @@ export default function ContactPage({ onNavigateToDestinations }) {
         <section className="mb-14 sm:mb-20 md:mb-28">
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12">
             <span className="text-[11px] sm:text-xs font-semibold tracking-wider text-slate-400 uppercase block mb-1.5">
-              Implantation Locale
+              {t('contact.hubs_tag')}
             </span>
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight">
-              Présents au plus près de vos étapes.
+              {t('contact.hubs_title')}
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm mt-1.5 font-light px-2">
-              Des équipes réactives prêtes à vous accueillir à chaque point névralgique du pays.
+              {t('contact.hubs_sub')}
             </p>
           </div>
 
