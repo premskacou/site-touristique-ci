@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+html, body {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+@theme {
+  --color-akwaba-gold: #F7931E;
+  --color-akwaba-green: #00A859;
+  --color-akwaba-coral: #FF5A5F;
+  --font-sans: 'Plus Jakarta Sans', 'Inter', sans-serif;
+}
+
+@utility glass-card {
+  background: rgba(18, 24, 38, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@utility glass-card-gold {
+  background: linear-gradient(135deg, rgba(247, 147, 30, 0.12), rgba(18, 24, 38, 0.7));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(247, 147, 30, 0.25);
+}
+
+@utility glass-card-green {
+  background: linear-gradient(135deg, rgba(0, 168, 89, 0.12), rgba(18, 24, 38, 0.7));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 168, 89, 0.25);
+}
+
+@utility text-gradient-gold {
+  background: linear-gradient(135deg, #F7931E 0%, #FBBF24 50%, #FFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-gradient-green {
+  background: linear-gradient(135deg, #34D399 0%, #00A859 50%, #059669 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility text-gradient-ivory {
+  background: linear-gradient(135deg, #FFFFFF 0%, #E2E8F0 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@utility perspective-1200 {
+  perspective: 1200px;
+}
+
+@utility preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0E17;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F293D;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F7931E;
+}
