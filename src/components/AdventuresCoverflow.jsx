@@ -11,42 +11,42 @@ export default function AdventuresCoverflow({ onOpenBooking }) {
       id: 0,
       title: t('adventures.item_0_title'),
       subtitle: t('adventures.item_0_sub'),
-      image: '/images/man_mountains.jpg',
+      image: '/images/man/man-cascade.jpg',
       tag: 'Man',
     },
     {
       id: 1,
       title: t('adventures.item_1_title'),
       subtitle: t('adventures.item_1_sub'),
-      image: '/images/campers_sunset.jpg',
-      tag: 'Bivouac',
+      image: '/images/san-pedro/sp-monogaga.jpg',
+      tag: 'San-Pédro',
     },
     {
       id: 2,
       title: t('adventures.item_2_title'),
       subtitle: t('adventures.item_2_sub'),
-      image: '/images/assinie_beach.jpg',
+      image: '/images/assinie/assinie-beach.jpg',
       tag: 'Assinie',
     },
     {
       id: 3,
       title: t('adventures.item_3_title'),
       subtitle: t('adventures.item_3_sub'),
-      image: '/images/hero_abidjan.jpg',
+      image: '/images/abidjan/abidjan-main.jpg',
       tag: 'Abidjan',
     },
     {
       id: 4,
       title: t('adventures.item_4_title'),
       subtitle: t('adventures.item_4_sub'),
-      image: '/images/hikers_trail.jpg',
-      tag: 'Safari',
+      image: '/images/yamoussoukro/lac-caimans.jpg',
+      tag: 'Yamoussoukro',
     },
     {
       id: 5,
       title: t('adventures.item_5_title'),
       subtitle: t('adventures.item_5_sub'),
-      image: '/images/smiling_hikers.jpg',
+      image: '/images/grand-bassam/gb-main.jpg',
       tag: 'Bassam',
     },
   ];
@@ -168,6 +168,8 @@ export default function AdventuresCoverflow({ onOpenBooking }) {
                     src={item.image}
                     alt={item.title}
                     draggable={false}
+                    loading="lazy"
+                    decoding="async"
                     className={`w-full h-full object-cover select-none pointer-events-none ${
                       isCenter ? 'brightness-100' : 'brightness-60'
                     }`}

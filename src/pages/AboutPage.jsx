@@ -110,7 +110,7 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
         >
           <div className="relative min-h-[300px] h-[320px] sm:h-[400px] md:h-[480px] w-full overflow-hidden">
             <img
-              src="/images/smiling_hikers.jpg"
+              src="/images/abidjan/abidjan-main.jpg"
               alt="Voyageurs et guides Akwaba Tours en immersion"
               className="w-full h-full object-cover object-center filter contrast-[1.05] brightness-[0.85]"
             />
@@ -183,7 +183,7 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
               <div className="space-y-3 sm:space-y-6">
                 <div className="rounded-[18px] sm:rounded-[28px] overflow-hidden border border-white/10 shadow-xl aspect-[4/5] bg-black/40">
                   <img
-                    src="/images/campers_sunset.jpg"
+                    src="/images/assinie/assinie-beach.jpg"
                     alt="Coucher de soleil en Côte d'Ivoire"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />
@@ -201,7 +201,7 @@ export default function AboutPage({ onOpenBooking, onNavigateToDestinations }) {
                 </div>
                 <div className="rounded-[18px] sm:rounded-[28px] overflow-hidden border border-white/10 shadow-xl aspect-[4/5] bg-black/40">
                   <img
-                    src="/images/man_mountains.jpg"
+                    src="/images/man/man-cascade.jpg"
                     alt="Montagnes et nature sauvage de Man"
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
                   />

@@ -81,6 +81,8 @@ export default function GastronomyVibes() {
                 <img
                   src={dish.image}
                   alt={dish.name}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E17] via-transparent to-transparent" />

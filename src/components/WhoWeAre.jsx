@@ -91,7 +91,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
             {/* Bottom Image */}
             <div className="w-full rounded-[22px] overflow-hidden aspect-[16/10] relative shadow-sm">
               <img
-                src="/images/campers_sunset.jpg"
+                src="/images/assinie/assinie-beach.jpg"
                 alt={t('who_we_are.stat1_label')}
                 loading="lazy"
                 decoding="async"
@@ -110,7 +110,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
             className="rounded-[32px] overflow-hidden shadow-lg group cursor-pointer relative min-h-[380px] md:min-h-[440px]"
           >
             <img
-              src="/images/hikers_trail.jpg"
+              src="/images/man/man-cascade.jpg"
               alt={t('who_we_are.stat2_title')}
               loading="lazy"
               decoding="async"
@@ -132,7 +132,7 @@ export default function WhoWeAre({ onNavigateAbout }) {
             {/* Top Image */}
             <div className="w-full rounded-[22px] overflow-hidden aspect-[16/10] relative shadow-sm mb-6">
               <img
-                src="/images/smiling_hikers.jpg"
+                src="/images/grand-bassam/gb-culture.jpg"
                 alt={t('who_we_are.stat3_label')}
                 loading="lazy"
                 decoding="async"

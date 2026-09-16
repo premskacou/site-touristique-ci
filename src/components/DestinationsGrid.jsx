@@ -91,6 +91,8 @@ export default function DestinationsGrid({ filterSearch, onOpenBooking, currency
                   <img
                     src={dest.image}
                     alt={dest.name}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter brightness-95"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#0A0E17] via-transparent to-black/30" />

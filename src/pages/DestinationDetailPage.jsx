@@ -4,12 +4,105 @@ import { ArrowLeft, Star, ArrowRight } from 'lucide-react';
 import { DESTINATIONS } from '../data/mockData';
 import { useLanguage } from '../context/LanguageContext';
 
+const FlipCard = ({ photo, index, t }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+  const { lang } = useLanguage();
+
+  const getTranslatedText = (textObj) => {
+    if (!textObj) return '';
+    return typeof textObj === 'object' ? (textObj[lang] || textObj.fr) : textObj;
+  };
+
+  const title = getTranslatedText(photo.title);
+  const tag = getTranslatedText(photo.tag);
+  const desc = getTranslatedText(photo.desc);
+
+  return (
+    <div
+      className="group perspective-[1000px] h-[220px] sm:h-[260px] md:h-[300px] lg:h-[340px] w-full cursor-pointer"
+      onClick={() => setIsFlipped(!isFlipped)}
+    >
+      <motion.div
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        transition={{ duration: 0.6, type: "spring", stiffness: 200, damping: 20 }}
+        className="w-full h-full relative preserve-3d"
+        style={{ transformStyle: 'preserve-3d' }}
+      >
+        {/* Front Face */}
+        <div 
+          className="absolute inset-0 backface-hidden rounded-[20px] sm:rounded-[28px] overflow-hidden bg-[#111722] border border-white/10 shadow-xl flex flex-col justify-between"
+          style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+        >
+          <div className="relative w-full h-full overflow-hidden bg-black/40">
+            <img
+              src={photo.url}
+              alt={title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none" />
+
+            <div className="absolute top-3.5 left-3.5 z-10">
+              <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[11px] sm:text-xs font-bold text-amber-300 shadow-md">
+                {tag}
+              </span>
+            </div>
+
+            <div className="absolute bottom-4 left-4 right-4 z-10 text-white pointer-events-none">
+              <span className="text-[10px] sm:text-[11px] text-slate-300/80 uppercase tracking-widest block font-semibold mb-0.5">
+                {t('destination_detail.view_prefix', 'Vue')} 0{index + 1}
+              </span>
+              <h3 className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-amber-300 transition-colors line-clamp-1">
+                {title}
+              </h3>
+            </div>
+            
+            {/* Flip hint icon */}
+            <div className="absolute bottom-4 right-4 text-white/50 group-hover:text-amber-400 transition-colors">
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="7.5 4.21 12 6.81 16.5 4.21"></polyline><polyline points="7.5 19.79 7.5 14.6 3 12"></polyline><polyline points="21 12 16.5 14.6 16.5 19.79"></polyline><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Back Face */}
+        <div 
+          className="absolute inset-0 backface-hidden rounded-[20px] sm:rounded-[28px] overflow-hidden bg-gradient-to-br from-[#111722] to-[#1A2333] border border-amber-400/50 shadow-[0_0_30px_rgba(251,191,36,0.15)] flex flex-col p-6 sm:p-8 items-center justify-center text-center"
+          style={{ 
+            backfaceVisibility: 'hidden', 
+            WebkitBackfaceVisibility: 'hidden', 
+            transform: 'rotateY(180deg)' 
+          }}
+        >
+          <div className="absolute inset-0 opacity-10">
+            <img src={photo.url} alt="bg" className="w-full h-full object-cover blur-sm" />
+          </div>
+          <div className="relative z-10 flex flex-col items-center">
+            <span className="px-3 py-1 mb-4 rounded-full bg-amber-400/10 text-amber-400 text-xs font-bold uppercase tracking-widest border border-amber-400/20">
+              {tag}
+            </span>
+            <h4 className="text-xl sm:text-2xl font-bold text-white mb-3 leading-tight">
+              {title}
+            </h4>
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-xs mx-auto">
+              {desc || "Découvrez ce lieu unique qui fait le charme et la réputation de cette destination exceptionnelle."}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 export default function DestinationDetailPage({ destinationId, onBack, onOpenBooking, onNavigateHome }) {
   const { t } = useLanguage();
   const smoothEase = [0.16, 1, 0.3, 1];
 
   // Find destination by id, fallback to first if not found
-  const destination = DESTINATIONS.find((d) => d.id === destinationId) || DESTINATIONS[0];
+  const baseDest = DESTINATIONS.find((d) => d.id === destinationId) || DESTINATIONS[0];
+  const destination = {
+    ...baseDest,
+    name: t(`dest.${baseDest.id}.name`, baseDest.name),
+    tagline: t(`dest.${baseDest.id}.tagline`, baseDest.tagline)
+  };
 
   const [currentImage, setCurrentImage] = useState(destination.image);
 
@@ -21,15 +114,15 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
     ? destination.gallery
     : [
         { url: destination.image, title: `${destination.name} — Vue Panoramique`, tag: 'Panorama' },
-        { url: '/images/campers_sunset.jpg', title: 'Coucher de soleil & Crépuscule', tag: 'Coucher de Soleil' },
-        { url: '/images/smiling_hikers.jpg', title: 'Voyageurs en excursion', tag: 'Voyageurs' },
-        { url: '/images/ivory_gastronomy.jpg', title: 'Saveurs du terroir local', tag: 'Gastronomie' },
-        { url: '/images/hikers_trail.jpg', title: 'Nature préservée & Randonnée', tag: 'Nature' },
+        { url: '/images/assinie/assinie-beach.jpg', title: 'Coucher de soleil & Crépuscule', tag: 'Coucher de Soleil' },
+        { url: '/images/abidjan/abidjan-stade.jpg', title: 'Voyageurs en excursion', tag: 'Voyageurs' },
+        { url: '/images/gastronomie/gastro-plat.jpg', title: 'Saveurs du terroir local', tag: 'Gastronomie' },
+        { url: '/images/man/man-cascade.jpg', title: 'Nature préservée & Randonnée', tag: 'Nature' },
       ];
 
   // 6 cards total (2 rows x 3 columns) like in the user's screenshot
   const galleryPhotos = baseGallery.length === 5
-    ? [...baseGallery, { url: '/images/smiling_hikers.jpg', title: 'Immersion & Rencontres chaleureuses', tag: 'Atmosphère' }]
+    ? [...baseGallery, { url: '/images/grand-bassam/gb-culture.jpg', title: 'Immersion & Rencontres chaleureuses', tag: 'Atmosphère' }]
     : baseGallery;
 
   return (
@@ -179,43 +272,7 @@ export default function DestinationDetailPage({ destinationId, onBack, onOpenBoo
           {/* 3-Column Grid Responsive (1 col Mobile, 2 cols Tablet, 3 cols Desktop) */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {galleryPhotos.map((photo, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -6 }}
-                transition={{ duration: 0.35, ease: 'easeOut' }}
-                onClick={() => {
-                  setCurrentImage(photo.url);
-                  window.scrollTo({ top: 220, behavior: 'smooth' });
-                }}
-                className="group rounded-[20px] sm:rounded-[28px] overflow-hidden bg-[#111722] border border-white/10 hover:border-amber-400/50 shadow-xl cursor-pointer flex flex-col justify-between"
-              >
-                {/* Image Card */}
-                <div className="relative h-[220px] sm:h-[260px] md:h-[300px] lg:h-[340px] w-full overflow-hidden bg-black/40">
-                  <img
-                    src={photo.url}
-                    alt={photo.title}
-                    className="w-full h-full object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none" />
-
-                  {/* Top-left pill badge */}
-                  <div className="absolute top-3.5 left-3.5 z-10">
-                    <span className="px-3 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/20 text-[11px] sm:text-xs font-bold text-amber-300 shadow-md">
-                      {photo.tag}
-                    </span>
-                  </div>
-
-                  {/* Bottom title & label */}
-                  <div className="absolute bottom-4 left-4 right-4 z-10 text-white pointer-events-none">
-                    <span className="text-[10px] sm:text-[11px] text-slate-300/80 uppercase tracking-widest block font-semibold mb-0.5">
-                      {t('destination_detail.view_prefix', 'Vue')} 0{index + 1}
-                    </span>
-                    <h3 className="text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-amber-300 transition-colors line-clamp-1">
-                      {photo.title}
-                    </h3>
-                  </div>
-                </div>
-              </motion.div>
+              <FlipCard key={index} photo={photo} index={index} t={t} />
             ))}
           </div>
         </motion.section>

@@ -16,56 +16,56 @@ export default function Hero({ onSearchDestination, onOpenBooking }) {
     {
       id: 0,
       title: 'Soirées Maquis & Garba',
-      image: '/images/ivory_gastronomy.jpg',
+      image: '/images/gastronomie/gastro-plat.jpg',
       alt: 'Soirées Maquis & Garba',
       tag: 'Garba',
     },
     {
       id: 1,
       title: 'Lagune Ébrié & Skyline',
-      image: '/images/hero_abidjan.jpg',
+      image: '/images/abidjan/abidjan-main.jpg',
       alt: 'Lagune Ébrié & Skyline Abidjan',
       tag: 'Abidjan',
     },
     {
       id: 2,
       title: 'Basilique Majestueuse',
-      image: '/images/yamoussoukro_basilica.jpg',
+      image: '/images/yamoussoukro/yamoussoukro-main.jpg',
       alt: 'Basilique Notre-Dame de la Paix',
       tag: 'Yamoussoukro',
     },
     {
       id: 3,
       title: 'Plages d’Assinie-Mafia',
-      image: '/images/assinie_beach.jpg',
+      image: '/images/assinie/assinie-beach.jpg',
       alt: 'Plages d’Assinie',
       tag: 'Assinie',
     },
     {
       id: 4,
       title: 'Cascades & Mont Tonkpi',
-      image: '/images/man_mountains.jpg',
+      image: '/images/man/man-cascade.jpg',
       alt: 'Cascades et Montagnes de Man',
       tag: 'Man',
     },
     {
       id: 5,
       title: 'Ponts de Lianes Sacrés',
-      image: '/images/man_mountains.jpg',
+      image: '/images/man/man-liasse.jpg',
       alt: 'Ponts de Lianes Sacrés',
       tag: 'Cascades',
     },
     {
       id: 6,
-      title: 'Safari & Terres Sauvages',
-      image: '/images/hero_abidjan.jpg',
-      alt: 'Safari et Faune Sauvage',
-      tag: 'Abidjan',
+      title: 'Baie de Monogaga',
+      image: '/images/san-pedro/sp-monogaga.jpg',
+      alt: 'Baie de Monogaga & San-Pédro',
+      tag: 'San-Pédro',
     },
     {
       id: 7,
       title: 'Grand-Bassam Historique',
-      image: '/images/campers_sunset.jpg',
+      image: '/images/grand-bassam/gb-main.jpg',
       alt: 'Grand-Bassam UNESCO Quartier France',
       tag: 'Grand-Bassam',
     },
@@ -241,8 +241,11 @@ export default function Hero({ onSearchDestination, onOpenBooking }) {
       {/* Background with Dark Moody Misty Forest */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <img
-          src="/images/man_mountains.jpg"
+          src="/images/man/man-top.jpg"
           alt="Forêt tropicale et montagnes de Côte d'Ivoire"
+          fetchPriority="high"
+          loading="eager"
+          decoding="async"
           className="w-full h-full object-cover object-center filter brightness-[0.28] contrast-125 scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#070B12]/85 via-black/35 to-[#070B12]" />

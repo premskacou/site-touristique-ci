@@ -2,6 +2,16 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const translations = {
   fr: {
+    // Destinations Details
+    dest: {
+      abidjan: { name: "Abidjan", tagline: "La Perle des Lagunes & Capitale Économique" },
+      yamoussoukro: { name: "Yamoussoukro", tagline: "Capitale Politique & Paix" },
+      assinie: { name: "Assinie-Mafia", tagline: "Plages Paradisiaques, Lagune Aby & Écolodges VIP" },
+      man: { name: "Man & Les Montagnes", tagline: "La Région des Dix-Huit Montagnes & Cascades" },
+      gastronomie: { name: "Circuit Gourmand Ivoirien", tagline: "Garba, Alloco, Kedjenou & Maquis Authentiques" },
+      'grand-bassam': { name: "Grand-Bassam", tagline: "Cité Historique & Patrimoine Mondial UNESCO" },
+      'san-pedro': { name: "San-Pédro & Baie des Sirènes", tagline: "Plages Sauvages & Écotourisme Littoral" }
+    },
     // Navigation
     nav: {
       home: 'Accueil',
@@ -323,6 +333,16 @@ const translations = {
   },
 
   en: {
+    // Destinations Details
+    dest: {
+      abidjan: { name: "Abidjan", tagline: "The Pearl of Lagoons & Economic Capital" },
+      yamoussoukro: { name: "Yamoussoukro", tagline: "Political Capital & Peace" },
+      assinie: { name: "Assinie-Mafia", tagline: "Paradisiacal Beaches, Aby Lagoon & VIP Ecolodges" },
+      man: { name: "Man & The Mountains", tagline: "Region of the Eighteen Mountains & Waterfalls" },
+      gastronomie: { name: "Ivorian Culinary Tour", tagline: "Garba, Alloco, Kedjenou & Authentic Maquis" },
+      'grand-bassam': { name: "Grand-Bassam", tagline: "Historic City & UNESCO World Heritage" },
+      'san-pedro': { name: "San-Pédro & Mermaid Bay", tagline: "Wild Beaches & Coastal Ecotourism" }
+    },
     // Navigation
     nav: {
       home: 'Home',

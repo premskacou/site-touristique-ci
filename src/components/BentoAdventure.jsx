@@ -59,7 +59,7 @@ export default function BentoAdventure() {
             
             {/* Cloud/Mountain illustration in the background */}
             <div className="absolute top-1/2 left-0 right-0 -translate-y-1/2 opacity-30 mix-blend-overlay pointer-events-none">
-              <img src="/images/man_mountains.jpg" alt="Montagne" className="w-full h-full object-cover scale-150 grayscale" />
+              <img src="/images/man/man-cascade.jpg" alt="Montagne" loading="lazy" decoding="async" className="w-full h-full object-cover scale-150 grayscale" />
             </div>
             
             <div className="mt-auto relative z-10">
@@ -102,7 +102,7 @@ export default function BentoAdventure() {
             whileHover={{ y: -6, transition: { duration: 0.35, ease: "easeOut" } }}
             className="col-span-1 md:row-span-1 rounded-3xl overflow-hidden relative group cursor-pointer"
           >
-            <img src="/images/assinie_beach.jpg" alt="Lagune" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+            <img src="/images/assinie/assinie-lagune.jpg" alt="Lagune" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
             <div className="absolute bottom-5 left-5 right-5 text-sm font-medium text-white/95 leading-snug">
               Glissez sur les eaux tranquilles et imprégnez-vous de la beauté sereine d'un lac caché.
@@ -157,7 +157,7 @@ export default function BentoAdventure() {
             whileHover={{ y: -6, transition: { duration: 0.35, ease: "easeOut" } }}
             className="col-span-1 md:col-span-2 md:row-span-1 rounded-3xl overflow-hidden relative group cursor-pointer"
           >
-            <img src="/images/hero_abidjan.jpg" alt="Coucher de soleil" className="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-700 ease-out" />
+            <img src="/images/abidjan/abidjan-skyline.jpg" alt="Coucher de soleil" loading="lazy" decoding="async" className="w-full h-full object-cover object-bottom group-hover:scale-105 transition-transform duration-700 ease-out" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent pointer-events-none" />
             <div className="absolute bottom-5 left-6 right-6 text-[15px] font-medium text-white/95 leading-snug">
               Découvrez les merveilles d'une lagune isolée, où les eaux cristallines révèlent un monde marin vibrant sous votre bateau.
@@ -195,7 +195,7 @@ export default function BentoAdventure() {
             whileHover={{ y: -6, transition: { duration: 0.35, ease: "easeOut" } }}
             className="col-span-1 md:row-span-1 rounded-3xl overflow-hidden relative group cursor-pointer"
           >
-            <img src="/images/man_mountains.jpg" alt="Forêt" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out brightness-[0.6]" />
+            <img src="/images/man/man-top.jpg" alt="Forêt" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out brightness-[0.6]" />
             
             {/* Spinning Text Circle */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-32 h-32 flex items-center justify-center">
@@ -225,7 +225,7 @@ export default function BentoAdventure() {
             whileHover={{ y: -6, transition: { duration: 0.35, ease: "easeOut" } }}
             className="col-span-1 md:col-span-2 md:row-span-1 rounded-3xl overflow-hidden relative group cursor-pointer"
           >
-            <img src="/images/assinie_beach.jpg" alt="Eau cristalline" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
+            <img src="/images/san-pedro/sp-monogaga.jpg" alt="Eau cristalline" loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent pointer-events-none" />
             <div className="absolute bottom-5 left-6 right-8 text-[15px] font-medium text-white/95 leading-snug">
               Terminez votre journée par une paisible balade en bateau au coucher du soleil, alors que le ciel se transforme en une palette de couleurs époustouflante.

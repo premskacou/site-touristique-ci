@@ -20,7 +20,7 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
       slug: 'abidjan',
       title: t('popular.abidjan_title'),
       places: t('popular.abidjan_places'),
-      image: '/images/hero_abidjan.jpg',
+      image: '/images/abidjan/abidjan-main.jpg',
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
       slug: 'yamoussoukro',
       title: t('popular.yamoussoukro_title'),
       places: t('popular.yamoussoukro_places'),
-      image: '/images/yamoussoukro_basilica.jpg',
+      image: '/images/yamoussoukro/yamoussoukro-main.jpg',
     },
     {
       id: 3,
@@ -36,7 +36,7 @@ export default function PopularDestinations({ onOpenBooking, onNavigateToDestina
       slug: 'assinie',
       title: t('popular.assinie_title'),
       places: t('popular.assinie_places'),
-      image: '/images/assinie_beach.jpg',
+      image: '/images/assinie/assinie-beach.jpg',
     },
   ];
 
